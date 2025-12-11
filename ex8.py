@@ -32,9 +32,6 @@ class Point:
         self.adjacencies.append(adjacency)
 
 
-def is_cyclic(node, visited, parent):
-    pass
-
 def dfs(node, visited, points):
     visited[node] = True
     adjacencies = points[node].adjacencies
@@ -45,6 +42,7 @@ def dfs(node, visited, points):
             processes_nodes.extend(new_processed_nodes)
 
     return processes_nodes
+
 
 def run_ex(file):
     lines = [line.split(",") for line in read_file(file)]
@@ -75,7 +73,7 @@ def run_ex(file):
             points[edge.point2].add_adjacent(edge.point1)
             visited[edge.point1] = True
             visited[edge.point2] = True
-            if len(dfs(edge.point1, [False]*len(points),points)) == len(points):
+            if len(dfs(edge.point1, [False] * len(points), points)) == len(points):
                 final_edge = edge
                 break
 
@@ -86,14 +84,8 @@ def run_ex(file):
     return result
 
 
-def files_are_equal(file1, file2):
-    with open(file1, 'r') as f1, open(file2, 'r') as f2:
-        return f1.read() == f2.read()
-
-
 if __name__ == '__main__':
     a = run_ex('ex8_1_input_example')
     if a == 40:
         print("Example test passed")
     run_ex('ex8_1_input')
-

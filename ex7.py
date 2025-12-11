@@ -17,6 +17,7 @@ def surround_splitter(lines, row, col, side):
 
     return lines
 
+
 def simulate_timeline_2(lines, row, start_col):
     col_freq = {start_col: 1}
     count = 1
@@ -26,8 +27,8 @@ def simulate_timeline_2(lines, row, start_col):
         col_freq = {}
         for j, freq in this_round.items():
             if lines[i][j] == "^":
-                col_freq[j-1] = col_freq.get(j-1, 0) + freq
-                col_freq[j+1] = col_freq.get(j+1, 0) + freq
+                col_freq[j - 1] = col_freq.get(j - 1, 0) + freq
+                col_freq[j + 1] = col_freq.get(j + 1, 0) + freq
 
                 count += freq
 
@@ -57,7 +58,6 @@ def simulate_timeline(lines, row, start_col):
             elif lines[i - 1][j] == ".":
                 to_explore.append(j)
 
-
     return count
 
 
@@ -74,11 +74,6 @@ def run_ex(file):
     print(paths2)
 
     return paths2
-
-
-def files_are_equal(file1, file2):
-    with open(file1, 'r') as f1, open(file2, 'r') as f2:
-        return f1.read() == f2.read()
 
 
 if __name__ == '__main__':
