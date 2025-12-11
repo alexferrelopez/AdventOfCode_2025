@@ -46,7 +46,7 @@ def dfs(node, visited, points):
 
     return processes_nodes
 
-def run_ex(file, max_connections):
+def run_ex(file):
     lines = [line.split(",") for line in read_file(file)]
     points = []
     edges = []
@@ -67,7 +67,7 @@ def run_ex(file, max_connections):
 
     visited = [False] * len(points)
 
-    limit = 0
+    final_edge = None
     for edge in sorted_edges:
         current_nodes = dfs(edge.point1, visited, points)
         if edge.point2 not in current_nodes:
@@ -75,24 +75,11 @@ def run_ex(file, max_connections):
             points[edge.point2].add_adjacent(edge.point1)
             visited[edge.point1] = True
             visited[edge.point2] = True
-            limit += 1
-            if limit == max_connections:
+            if len(dfs(edge.point1, [False]*len(points),points)) == len(points):
+                final_edge = edge
                 break
 
-    visited = [False] * len(points)
-
-    last_count = 0
-    groups = []
-    for i in range(len(points)):
-        if not visited[i]:
-            processed_nodes = dfs(i, visited, points)
-            this_count = sum(1 for v in visited if v)
-            groups.append(this_count-last_count)
-            last_count = this_count
-
-    groups.sort()
-
-    result = groups[-1] * groups[-2] * groups[-3]
+    result = final_edge.point1_ref.x * final_edge.point2_ref.x
 
     print(result)
 
@@ -105,8 +92,8 @@ def files_are_equal(file1, file2):
 
 
 if __name__ == '__main__':
-    a = run_ex('ex8_1_input_example', 10)
+    a = run_ex('ex8_1_input_example')
     if a == 40:
         print("Example test passed")
-    run_ex('ex8_1_input', 1000)
+    run_ex('ex8_1_input')
 
