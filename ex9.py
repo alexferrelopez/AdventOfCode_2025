@@ -212,7 +212,7 @@ def run_ex(file):
 
     print(max_area)
 
-    return 0
+    return max_area
 
 
 if __name__ == '__main__':
